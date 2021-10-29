@@ -1,4 +1,12 @@
 // Assignment code here
+window.alert("Hello. Welcome to The World's Most Difficult Password Generator. First, pick your variables. Then, click generate password.")
+
+function generatePassword() {
+  console.log("Button clicked!")
+  // reset previous password
+  passInfo.reset()
+  
+}
 
 // function to ask about password length
 var passLength = function() {
@@ -17,14 +25,14 @@ var passLength = function() {
     return passLength();
   }
 
-  console.log("You have chosen " + promptLength + " characters.");
+  console.log("You have chosen " + promptLength + " characters.")
 
   return length;
 }
 
 var passCharacters = function() {
   var characterCase = "";
-  var promptCase = window.prompt("What cases would you like to use? Choose 'upper', 'lower', or 'both'?)
+  var promptCase = window.prompt("What cases would you like to use? Choose 'upper', 'lower', or 'both'?")
 
   // validate prompt answer
   if (promptCase === "" || promptCase === null) {
@@ -46,7 +54,7 @@ var passCharacters = function() {
 
 
 
-// Function to generate a new password
+// Function to generate a new password and on display screen
 var setPass = function() {
   // reset previous password
   passInfo.reset()
@@ -56,7 +64,7 @@ var setPass = function() {
 
 
 var passInfo = {
-  length: passLength()
+  length: passLength(),
   characterCase: passCharacters()
 }
 
