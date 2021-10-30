@@ -36,7 +36,7 @@ function generatePassword() {
     makePassword.push(randomUpper)
   }
 
-  for (let index = 1; index <= passInfo.length; index++) { 
+  for (let index = 1; index <= passInfo.passwordLength; index++) { 
     getIndex(makePassword.length)
   }
 }
@@ -55,7 +55,7 @@ var passLength = function() {
 
   if (promptLength < 8 || promptLength > 128) {
     window.alert("You have chosen an invalid password length. Please choose a valid length.");
-    return passLength();
+    return promptLength();
   }
 
   console.log("You have chosen " + promptLength + " characters.")
