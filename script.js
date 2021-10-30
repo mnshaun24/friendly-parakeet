@@ -3,9 +3,16 @@ window.alert("Hello. Welcome to The World's Most Difficult Password Generator. F
 
 function generatePassword() {
   console.log("Button clicked!")
-  // reset previous password
-  passInfo.reset()
-  
+
+  //when generatePassword runs, passInfo calls the other functions.
+  var passInfo = {
+    length: passLength(),
+    characterCase: passCharacters()
+  }
+
+  console.log(passInfo)
+
+  return "batman"
 }
 
 // function to ask about password length
@@ -37,37 +44,34 @@ var passCharacters = function() {
   // validate prompt answer
   if (promptCase === "" || promptCase === null) {
     window.alert("You must enter a valid criterion. Try again.");
-    // return call again and prevent rest of function from running
     return passCharacters();
   }
-
   // convert to lower case
   promptCase = promptCase.toLowerCase();
+  console.log("promptCase is ", promptCase)
 
-  // confirm choice
-  window.alert("You have chosen " + promptCase);
+  return passCharacters;
 
-  return characterCase;
 }
 
+// the following functions are from JavaScript Password Generator, uploaded Oct 21, 2019 at https://www.youtube.com/watch?v=duNmhKgtcsI
 
-
-
-
-// Function to generate a new password and on display screen
-var setPass = function() {
-  // reset previous password
-  passInfo.reset()
-  console.log("Hi there");
+function randomLower() {
+  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
 }
 
-
-
-var passInfo = {
-  length: passLength(),
-  characterCase: passCharacters()
+function randomUpper() {
+  return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
 }
 
+function randomNumb() {
+  return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+}
+
+function randomSymb() {
+  const symbols = "!@#$%^&*{}[]<>/,.";
+  return symbols[Math.floor(Math.random() * symbols.length)]
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
