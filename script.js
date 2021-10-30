@@ -2,17 +2,19 @@
 window.alert("Hello. Welcome to The World's Most Difficult Password Generator. First, pick your variables. Then, click generate password.")
 
 function generatePassword() {
-  console.log("Button clicked!")
 
   //when generatePassword runs, passInfo calls the other functions.
   var passInfo = {
     length: passLength(),
-    characterCase: passCharacters()
-  }
+    lower: passLower(),
+    upper: passUpper(),
+    number: passNumb(),
+    special: passSpec(),
+  };
 
   console.log(passInfo)
 
-  return "batman"
+  return passInfo;
 }
 
 // function to ask about password length
@@ -37,22 +39,74 @@ var passLength = function() {
   return length;
 }
 
-var passCharacters = function() {
-  var characterCase = "";
-  var promptCase = window.prompt("What cases would you like to use? Choose 'upper', 'lower', or 'both'?")
+// function to ask for lower case
+var passLower = function() {
+  var lower = "";
+  var promptLower = window.prompt("Would you like to include lower case letters? Type 'yes' or 'no'.");
 
   // validate prompt answer
-  if (promptCase === "" || promptCase === null) {
+  if (promptLower === "" || promptLower === null) {
     window.alert("You must enter a valid criterion. Try again.");
-    return passCharacters();
+    // return call again and prevent rest of function from running
+    return passLower();
   }
-  // convert to lower case
-  promptCase = promptCase.toLowerCase();
-  console.log("promptCase is ", promptCase)
 
-  return passCharacters;
+  promptLower = promptLower.toLowerCase();
 
+  return lower;
 }
+
+// function to ask for upper case
+var passUpper = function() {
+  var upper = "";
+  var promptUpper = window.prompt("Would you like to include upper case letters? Type 'yes' or 'no'.");
+
+  // validate prompt answer
+  if (promptUpper === "" || promptUpper === null) {
+    window.alert("You must enter a valid criterion. Try again.");
+    // return call again and prevent rest of function from running
+    return passUpper();
+  }
+
+  promptUpper = promptUpper.toLowerCase();
+
+  return upper;
+}
+
+// function to ask for numbers
+var passNumb = function() {
+  var number = "";
+  var promptNumber = window.prompt("Would you like to include numbers? Type 'yes' or 'no'.");
+
+  // validate prompt answer
+  if (promptNumber === "" || promptNumber === null) {
+    window.alert("You must enter a valid criterion. Try again.");
+    // return call again and prevent rest of function from running
+    return passNumb();
+  }
+
+  promptNumber = promptNumber.toLowerCase();
+
+  return number;
+}
+
+// function to ask for numbers
+var passSpec = function() {
+  var special = "";
+  var promptSpecial = window.prompt("Would you like to include special characters? Type 'yes' or 'no'.");
+
+  // validate prompt answer
+  if (promptSpecial === "" || promptSpecial === null) {
+    window.alert("You must enter a valid criterion. Try again.");
+    // return call again and prevent rest of function from running
+    return passSpec();
+  }
+
+  promptSpecial = promptSpecial.toLowerCase();
+
+  return special;
+}
+
 
 // the following functions are from JavaScript Password Generator, uploaded Oct 21, 2019 at https://www.youtube.com/watch?v=duNmhKgtcsI
 
