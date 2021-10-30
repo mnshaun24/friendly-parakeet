@@ -3,6 +3,14 @@ window.alert("Hello. Welcome to The World's Most Difficult Password Generator. F
 
 function generatePassword() {
 
+  // set of required parameters as determined by user
+  var makePassword = []
+
+  // function to select an index from the array
+  function getIndex(bigly) {
+    return Math.floor(Math.random() * bigly)
+  };
+
   //when generatePassword runs, passInfo calls the other functions.
   var passInfo = {
     length: passLength(),
@@ -14,7 +22,19 @@ function generatePassword() {
 
   console.log(passInfo)
 
-  return passInfo;
+  // ifs to include parameters selected by user
+
+  if(passInfo.lower) {
+    makePassword.push(randomLower)
+  }
+
+  if(passInfo.upper) {
+    makePassword.push(randomUpper)
+  }
+
+  for (let index = 1; index <= passInfo.length; index++) { 
+    getIndex(makePassword.length)
+  }
 }
 
 // function to ask about password length
@@ -51,7 +71,7 @@ var passLower = function() {
     return passLower();
   }
 
-  promptLower = promptLower.toLowerCase();
+  lower = promptLower.toLowerCase();
 
   return lower;
 }
@@ -68,7 +88,7 @@ var passUpper = function() {
     return passUpper();
   }
 
-  promptUpper = promptUpper.toLowerCase();
+  upper = promptUpper.toLowerCase();
 
   return upper;
 }
@@ -85,7 +105,7 @@ var passNumb = function() {
     return passNumb();
   }
 
-  promptNumber = promptNumber.toLowerCase();
+  number = promptNumber.toLowerCase();
 
   return number;
 }
@@ -93,16 +113,9 @@ var passNumb = function() {
 // function to ask for numbers
 var passSpec = function() {
   var special = "";
-  var promptSpecial = window.prompt("Would you like to include special characters? Type 'yes' or 'no'.");
+  var promptSpecial = confirm("Would you like to include special characters?");
 
-  // validate prompt answer
-  if (promptSpecial === "" || promptSpecial === null) {
-    window.alert("You must enter a valid criterion. Try again.");
-    // return call again and prevent rest of function from running
-    return passSpec();
-  }
-
-  promptSpecial = promptSpecial.toLowerCase();
+  special = promptSpecial.toLowerCase();
 
   return special;
 }
