@@ -13,7 +13,7 @@ function generatePassword() {
 
   //when generatePassword runs, passInfo calls the other functions.
   var passInfo = {
-    length: passLength(),
+    passwordLength: passLength(),
     lower: passLower(),
     upper: passUpper(),
     number: passNumb(),
@@ -32,6 +32,10 @@ function generatePassword() {
     makePassword.push(randomUpper)
   }
 
+  if(passInfo.upper) {
+    makePassword.push(randomUpper)
+  }
+
   for (let index = 1; index <= passInfo.length; index++) { 
     getIndex(makePassword.length)
   }
@@ -39,7 +43,7 @@ function generatePassword() {
 
 // function to ask about password length
 var passLength = function() {
-  var length = "";
+  // var passwordLength = "";
   var promptLength = window.prompt('How many characters do you wish your password to be? Please enter a value between "8" and "128".');
 
   // validate prompt answer
@@ -56,68 +60,37 @@ var passLength = function() {
 
   console.log("You have chosen " + promptLength + " characters.")
 
-  return length;
+  var passwordLength = promptLength.value
+
+  return passwordLength;
 }
 
 // function to ask for lower case
 var passLower = function() {
-  var lower = "";
-  var promptLower = window.prompt("Would you like to include lower case letters? Type 'yes' or 'no'.");
+  var promptLower = window.confirm("Would you like to include lower case letters?");
 
-  // validate prompt answer
-  if (promptLower === "" || promptLower === null) {
-    window.alert("You must enter a valid criterion. Try again.");
-    // return call again and prevent rest of function from running
-    return passLower();
-  }
-
-  lower = promptLower.toLowerCase();
-
-  return lower;
+  return promptLower;
 }
 
 // function to ask for upper case
 var passUpper = function() {
-  var upper = "";
-  var promptUpper = window.prompt("Would you like to include upper case letters? Type 'yes' or 'no'.");
+  var promptUpper = window.confirm("Would you like to include upper case letters?");
 
-  // validate prompt answer
-  if (promptUpper === "" || promptUpper === null) {
-    window.alert("You must enter a valid criterion. Try again.");
-    // return call again and prevent rest of function from running
-    return passUpper();
-  }
-
-  upper = promptUpper.toLowerCase();
-
-  return upper;
+  return promptUpper;
 }
 
 // function to ask for numbers
 var passNumb = function() {
-  var number = "";
-  var promptNumber = window.prompt("Would you like to include numbers? Type 'yes' or 'no'.");
+  var promptNumber = window.confirm("Would you like to include numbers?");
 
-  // validate prompt answer
-  if (promptNumber === "" || promptNumber === null) {
-    window.alert("You must enter a valid criterion. Try again.");
-    // return call again and prevent rest of function from running
-    return passNumb();
-  }
-
-  number = promptNumber.toLowerCase();
-
-  return number;
+  return promptNumber;
 }
 
-// function to ask for numbers
+// function to ask for special characters
 var passSpec = function() {
-  var special = "";
   var promptSpecial = confirm("Would you like to include special characters?");
 
-  special = promptSpecial.toLowerCase();
-
-  return special;
+  return promptSpecial;
 }
 
 
