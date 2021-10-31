@@ -7,8 +7,8 @@ function generatePassword() {
   var makePassword = []
 
   // function to select an index from the array
-  function getIndex(bigly) {
-    return Math.floor(Math.random() * bigly)
+  function getIndex(anything) {
+    return Math.floor(Math.random() * anything)
   };
 
   //when generatePassword runs, passInfo calls the other functions.
@@ -25,20 +25,37 @@ function generatePassword() {
   // ifs to include parameters selected by user
 
   if(passInfo.lower) {
-    makePassword.push(randomLower)
+    makePassword.push(randomLower())
   }
 
   if(passInfo.upper) {
-    makePassword.push(randomUpper)
+    makePassword.push(randomUpper())
   }
 
-  if(passInfo.upper) {
-    makePassword.push(randomUpper)
+  if(passInfo.number) {
+    makePassword.push(randomNumb())
   }
 
-  for (let index = 1; index <= passInfo.passwordLength; index++) { 
-    getIndex(makePassword.length)
+  if(passInfo.special) {
+    makePassword.push(randomSymb())
   }
+
+  if(passInfo.lower === false && passInfo.upper === false && passInfo.number === false && passInfo.special === false) {
+    window.alert("You must selet at least one parameter. Please try again.");
+    return ("Please try again");
+  }
+
+  console.log(makePassword);
+  console.log(passInfo.passwordLength, makePassword.length);
+
+  for (let index = makePassword.length; index < passInfo.passwordLength; index++) { 
+    makePassword[index] = makePassword[getIndex(makePassword.length)];
+  }
+
+  var passwordString = makePassword.join("");
+
+  makePassword = [];
+  return passwordString;
 }
 
 // function to ask about password length
@@ -58,9 +75,9 @@ var passLength = function() {
     return promptLength();
   }
 
-  console.log("You have chosen " + promptLength + " characters.")
+  console.log("You have chosen " + promptLength + " characters.");
 
-  var passwordLength = promptLength.value
+  var passwordLength = promptLength;
 
   return passwordLength;
 }
